@@ -46,7 +46,19 @@ ON C.uid = U.id
 *Return matched & all in cards - 300,000 results*
 <br>
 
-## HAVING / GROUP BY
+> SELECT *
+FROM users
+CROSS JOIN cards
+
+*Return combinations of each row of users < first_table > with **all** records in cards < second_table > - 886,334,700,000 results*
+<br>
+
+## HAVING / GROUP BY / UNION
+
+### Reference
+
+- The GROUP BY statement is often used with aggregate functions (COUNT(), MAX(), MIN(), SUM(), AVG()) to group the result-set by one or more columns.
+- https://www.w3schools.com/sql/sql_groupby.asp
 
 > SELECT U.id, U.fname, U.lname, C.amount
 FROM `users` AS U 
@@ -55,4 +67,33 @@ ON C.uid = U.id
 HAVING U.id < 100
 
 *Return only matched & all user.id < 100 - 14 results*
+<br>
+
+> SELECT sum(amount), type
+FROM cards
+GROUP BY type
+ORDER BY type ASC
+
+*Return 5 type of card with sum of amount per card type - 5 results*
+<br>
+
+> SELECT concat('C', C.id) AS id, C.uid, 'Cards' AS status
+FROM cards AS C
+UNION
+SELECT concat('A', A.id) AS id, A.uid, 'Addresses' AS status
+FROM addresses AS A
+
+*Return all of cards & all of addresses, **note that columns need to be of the same type** - 598,862  results*
+<br>
+
+## VIEW
+
+> CREATE VIEW view_1 AS
+SELECT U.id, U.fname, U.lname, C.amount
+FROM `users` AS U 
+INNER JOIN `cards` AS C 
+ON C.uid = U.id
+HAVING U.id < 100
+
+*Will create view_1 in phpMyAdmin listed under Structure with type:**View***
 <br>

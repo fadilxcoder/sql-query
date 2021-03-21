@@ -17,7 +17,7 @@
 	$result = execSql($arr['right_join']); 
 
     foreach ($result as $data) :
-		dump($data);
+		  dump($data);
     endforeach;
     
     // echo json_encode(["HTTP" => 200]);
