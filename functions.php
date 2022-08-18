@@ -63,4 +63,24 @@
         return $sql;
     }
 
+    function jsonBuild()
+    {
+        $sql = "
+        SELECT 
+        vip_list.id AS id,
+        vip_list.name AS name,
+        vip_list.surname AS surname,
+        JSON_OBJECT(
+            'qa', vip_list.qa,
+            'status', vip_list.status,
+            'net_worth', vip_list.net_worth,
+            'registered_at', vip_list.registered_at
+        ) AS details
+        FROM vip_list
+        LIMIT 10
+        ";
+
+        return $sql;
+    }
+
 ?>

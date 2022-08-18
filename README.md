@@ -97,3 +97,23 @@ HAVING U.id < 100
 
 *Will create view_1 in phpMyAdmin listed under Structure with type:**View***
 <br>
+
+---
+
+# Additional Notes
+
+- https://dev.mysql.com/doc/refman/8.0/en/json-creation-functions.html ( Functions That Create JSON Values)
+
+```sql
+SELECT 
+vip_list.id AS id,
+vip_list.name AS name,
+vip_list.surname AS surname,
+JSON_OBJECT(
+    'qa', vip_list.qa,
+    'status', vip_list.status,
+    'net_worth', vip_list.net_worth,
+    'registered_at', vip_list.registered_at
+) AS details
+from vip_list
+```

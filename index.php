@@ -8,6 +8,8 @@
     use Tracy\Debugger;
     Debugger::enable(Debugger::DEVELOPMENT);
 
+    // dump('Queries consume lots of resources. Beware !'); die;
+
 	$arr = [
 		'inner_join' 	=> innerJoin(),
 		'left_join' 	=> leftJoin(),
@@ -17,8 +19,10 @@
 	$result = execSql($arr['right_join']); 
 
     foreach ($result as $data) :
-		  dump($data);
+        dump($data);
     endforeach;
     
-    // echo json_encode(["HTTP" => 200]);
+
+    dump(execSql(jsonBuild()));
+    
 ?>
